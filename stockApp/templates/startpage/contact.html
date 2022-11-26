@@ -1,0 +1,37 @@
+{% extends 'base_home.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4 ml-2">
+    <div class="row py-3 justify-content-center">
+        <h1 class="text-center">Contact</h1>
+    </div>
+    <div class="row py-3 justify-content-center">
+        <p class="h3">Have any questions? I would love to hear from you</p>
+    </div>
+    <div class="container py-3 px-0">
+        <div class="card rounded-lg shadow-sm">
+            <div class="card-body">
+                <form action="{% url 'contact' %}" method="post">
+                    {% include 'partials/messages.html' %}
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="email">Your e-mail</label>
+                        <input type="text" id="emailField" class="form-control form-control-sm rounded-sm" name="email" value="{{values.email}}">
+                    </div>
+                    <div class="emailFeedbackArea invalid-feedback" style="display:none"></div>
+                    <div class="form-group">
+                        <label for="subject">Subject</label>
+                        <input type="text" class="form-control form-control-sm rounded-sm" name="subject" value="{{values.subject}}">
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Your message</label>
+                        <textarea class="form-control" rows="3" name="message" style="font-size: 0.8203125rem;">{{values.message}}</textarea>
+                    </div>
+                    <input type="submit" value="Send" class="btn btn-primary btn-primary-sm rounded-sm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/contact.js' %}"></script>
+{% endblock %}

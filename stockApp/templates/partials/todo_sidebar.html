@@ -1,0 +1,53 @@
+{% load static %}
+{% load tags %}
+<nav id="sidebar">
+  <div class="custom-menu">
+    <button type="button" id="sidebarCollapse" class="btn btn-primary">
+      <i class="fa fa-bars"></i>
+      <span class="sr-only">Toggle Menu</span>
+    </button>
+  </div>
+  <h1><a href="{% url 'home' %}" class="logo">Home</a></h1>
+  <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+    Task lists
+  </h6>
+  <ul class="list-unstyled components mb-5">
+    <li class="{% is_active request 'today' %}">
+      <a href="{% url 'today' %}"><span class="fa fa-calendar mr-3"></span> Today</a>
+    </li>
+    <li class="{% is_active request 'active' %}">
+      <a href="{% url 'active' %}"><span class="fa fa-sticky-note mr-3"></span> Active</a>
+    </li>
+    <li class="{% is_active request 'completed' %}">
+      <a href="{% url 'completed' %}"><span class="fa-regular fa-circle-check mr-3"></span> Completed</a>
+    </li>
+    {% for list in lists %}
+    {% url 'todo' list.id as list_url %}
+    <li class="{% if request.path == list_url %} active {% endif %}">
+      <a href="{% url 'todo' list.id %}"><span class="fa fa-list mr-3"></span> {{list.name}}</a>
+    </li>
+    {% endfor %}
+    <li>
+      <a href="#" id="add_list"><span class="fa fa-circle-plus mr-3"></span>Add new list</a>
+    </li>
+    <li style="display: none;" id="add_list_form">
+      <form action="{% url 'add_list' %}" method="post" class="mt-3 bg-dark ml-3" style="background:#212121">
+            <input type="text" name="list_name" id="input_list"  class="form-control border-0 rounded-0" style="background:#212121" placeholder="New list">
+      </form>
+    </li>
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      Priorities
+    </h6>
+    {% for priority in priorities %}
+    {% url 'priority' priority.name as priority_url %}
+    <li class="{% if request.path == priority_url %} active {% endif %}">
+      <a href="{% url 'priority' priority.name %}"><span class="fa-solid fa-circle-exclamation mr-3"></span> {{priority.name}}</a>
+    </li>
+    {% endfor %}
+  </ul>
+  <div class="footer px-3">
+    <p class="text-center">&copy; 2022 Jakub &Scaron;k&aacute;p&iacute;k</p>
+  </div>
+</nav>
+
+

@@ -1,0 +1,147 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="h3 mb-3"><strong>My account</strong></h1>
+{% include 'partials/messages.html' %}
+<div class="col-md-12 py-3 px-0">
+    <a href="{% url 'edit_user' %}" class="btn btn-outline-primary rounded-sm">Edit</a>
+    <a href="{% url 'change_password' %}" class="btn btn-outline-primary rounded-sm">Change password</a>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card rounded-lg mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Username</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.username}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">First Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.first_name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Last Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.last_name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">E-mail</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.email}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Currency</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{profile.currency}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Account created</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.date_joined | date:'d N Y'}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row px-3">
+    <div class="col-md-2 float-left py-3 px-0">
+        <a href="{% url 'premium' %}" class="btn btn-outline-primary rounded-sm">Upgrade your plan</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card rounded-lg mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Premium Plan</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{premium.plan}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Companies in porfolio</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{profile.companies}}/{{premium.company_limit}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">API Requests</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{profile.api_requests}}/{{premium.api_limit}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row px-3">
+    <div class="col-md-12 py-3 px-0">
+        <a href="{% url 'generate_key' %}" class="btn btn-outline-primary rounded-sm">Generate API key</a>
+        <a href="{% url 'deactivate_api' %}" class="btn btn-outline-danger rounded-sm">Deactivate API</a>
+        <a href="{% url 'api_docs' %}" class="btn btn-outline-success rounded-sm">Documentation</a>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <div class="card rounded-lg mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <a class="mb-0">API key</a> <a class="bi bi-info-circle px-2" 
+                            data-bs-toggle="tooltip" 
+                            data-bs-placement="top" 
+                            title="If you want to start using your API, please click on button Generate key">
+                        </a>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{api.api_key}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Active</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{api.is_active}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/users.js' %}"></script>
+{% endblock %}

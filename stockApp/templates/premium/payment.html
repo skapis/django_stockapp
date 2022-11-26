@@ -1,0 +1,113 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="h3"><strong>Order recapitulation</strong></h1>
+{% include 'partials/messages.html' %}
+<div class="row py-1">
+    <div class="col">
+        <div class="card rounded-lg shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">User</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.username}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">First Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.first_name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Last Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.last_name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Email</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{user.email}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Order ID</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{product.order_id}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Order ID</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{product.order_date}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Product</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{product.product_name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Price</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{premium.price}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">API requests</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{premium.api_limit}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Maximum of companies in portfolio</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{premium.company_limit}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row py-3">
+    <div class="col">
+        <div class="card rounded-lg shadow-sm">
+            <div class="card-body">
+                <h2>Payment Instructions</h2>
+                <p>For now, there is no payment, please check your email and click on activation link</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="h3 mb-3"><strong>Change currency</strong></h1>
+<div class="row">
+    <div class="col">
+        <div class="card rounded-lg shadow-sm">
+            <div class="card-body">
+                <form action="{% url 'change_currency' %}" method="post">
+                    {% include 'partials/messages.html' %}
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="Currency">Currency</label>
+                        <select class="form-control form-control-sm rounded-sm" name="currency" id="slst1">
+                            {% for currency in currencies %}
+                                <option name="currency" value="{{currency.code}}">{{currency.name}} ({{currency.code}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="Change" class="btn btn-outline-primary btn-primary-sm rounded-sm">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

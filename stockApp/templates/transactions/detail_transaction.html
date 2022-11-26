@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block content %}
+<h1 class="h3"><strong>Transaction detail</strong></h1>
+<div class="col-md-12 pt-2 px-0">
+    <a href="{% url 'edit_transaction' transaction.id %}" class="btn btn-outline-primary rounded-sm">Edit</a>
+    <a href="{% url 'delete_transaction' transaction.id %}" class="btn btn-outline-danger rounded-sm">Delete</a>
+</div>
+<div class="row py-3">
+    <div class="col">
+        <div class="card rounded-lg shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Symbol</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.symbol}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Share price</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.cost_share}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Amount</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.shares}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Fee</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.fee_amount}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Broker</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.broker}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                        <p class="mb-0">Type</p>
+                    </div>
+                    <div class="col-sm-9">
+                        <p class="text-muted mb-0">{{transaction.tr_type}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

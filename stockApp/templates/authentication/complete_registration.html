@@ -1,0 +1,36 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card rounded-lg shadow-sm mt-5">
+            <div class="card-body">
+                <div class="card-title py-3 text-center">
+                    <h4><strong>Complete your registration</strong></h4>
+                </div>
+                <form action="{% url 'activate' uidb64 token %}", method="post">
+                    {% csrf_token %}
+                    {% include 'partials/messages.html' %}
+                    <div class="form-group">
+                        <input type="text" name="first_name" placeholder="First Name" class="form-control form-control-sm rounded-sm"/>
+                    </div>
+                    <div class="form-group">
+                        <input type="text" name="last_name" placeholder="Last Name" class="form-control form-control-sm rounded-sm"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="plan">Currency</label>
+                        <select name="currency" id="premium" class="form-control form-control-sm rounded-sm">
+                            {% for currency in currencies %}
+                                <option name="currency" value="{{currency.code}}">{{currency.name}} ({{currency.code}})</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <input type="submit" value="Submit" class="btn btn-block btn-primary submit-btn rounded-sm"/>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+{% endblock content %}

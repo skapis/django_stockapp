@@ -1,0 +1,34 @@
+{% load static %}
+<nav class="col-2 d-none d-md-block bg-light sidebar">
+  <div class="sidebar-sticky px-3 py-3">
+    <ul class="nav flex-column">
+      <li class="nav-item">
+        <a class="nav-link bi bi-grid" href="{% url 'dashboard' %}">
+          <span data-feather="home"></span>
+          Dashboard <span class="sr-only">(current)</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link bi bi-coin" href="{% url 'transactions' %}"> Transactions</a>
+      </li>
+      <li class="nav-item">
+        <a class="bi bi-cash nav-link" href="{% url 'dividend_dashboard' %}">
+          <span></span>Dividends</a>
+      </li>
+
+    </ul>
+
+    <h6 class="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
+      Settings
+    </h6>
+    <ul class="nav flex-column mb-2">
+      <li class="nav-item">
+        <a class="nav-link bi bi-person" href="{% url 'account' %}">
+          <span data-feather="file-text"></span>
+          Account
+        </a>
+    </ul>
+  </div>
+</nav>
+
+

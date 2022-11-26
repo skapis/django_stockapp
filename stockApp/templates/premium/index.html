@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="h3"><strong>Upgrade your portfolio plan</strong></h1>
+{% include 'partials/messages.html' %}
+<div class="row py-3">
+    <div class="col">
+      <div class="card rounded-lg mb-3 shadow-sm">
+          <div class="card-body">
+              <div class="row">
+                  <div class="col-sm-3">
+                  <p class="mb-0">Current plan</p>
+                  </div>
+                  <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{premium.plan}}</p>
+                  </div>
+              </div>
+              <hr>
+              <div class="row">
+                  <div class="col-sm-3">
+                  <p class="mb-0">Maximum companies in portfolio</p>
+                  </div>
+                  <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{premium.company_limit}}</p>
+                  </div>
+              </div>
+              <hr>
+              <div class="row">
+                  <div class="col-sm-3">
+                  <p class="mb-0">Maximum API requests per day</p>
+                  </div>
+                  <div class="col-sm-9">
+                  <p class="text-muted mb-0">{{premium.api_limit}}</p>
+                  </div>
+              </div>
+          </div>
+      </div>
+    </div>
+</div>
+<div class="row py-3">
+  <div class="col">
+    <div class="card-deck mb-3 text-center" name="plan" id="2">
+      <div class="card mb-4 box-shadow rounded-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Investor</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$15 <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+              <li>50 companies in portfolio</li>
+              <li>50 API requests/day</li>
+            </ul>
+            <form action="{% url 'confirm' '2' %}" method="get">
+              <input type="submit" id="2" value="Select plan" class="btn btn-lg btn-block btn-outline-primary rounded-sm">
+            </form>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col">
+    <div class="card-deck mb-3 text-center" name="plan" id="2">
+      <div class="card mb-4 box-shadow rounded-sm" id="3">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">Trader</h4>
+        </div>
+        <div class="card-body">
+          <h1 class="card-title pricing-card-title">$29 <small class="text-muted">/ mo</small></h1>
+          <ul class="list-unstyled mt-3 mb-4">
+              <li>100 companies in portfolio</li>
+              <li>100 API requests/day</li>
+            </ul>
+          <form action="{% url 'confirm' '3' %}" method="get">
+            <input type="submit" id="3" value="Select plan" class="btn btn-lg btn-block btn-outline-primary rounded-sm">
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

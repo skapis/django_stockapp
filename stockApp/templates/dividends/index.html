@@ -1,0 +1,130 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+<h1 class="h3 mb-3"><strong>Dividends Overview</strong></h1>
+{% include 'partials/messages.html' %}
+<div class="row" id="card-row">
+    <div class="col">
+        <div class="card flex-fill w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title text-center mb-0">Estimated Dividends</h5>
+            </div>
+            <div class="card-body py-3 flex-fill">
+                <div class="row align-items-center mb-2 text-center">
+                    <div class="col-12">
+                        <h3>{{total_dividends}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card flex-fill w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title text-center mb-0">Acquired Dividends</h5>
+            </div>
+            <div class="card-body py-3 flex-fill">
+                <div class="row align-items-center mb-2 text-center">
+                    <div class="col-12">
+                        <h3>{{acquired_div}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card flex-fill w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title text-center mb-0">Dividend (Investment)</h5>
+            </div>
+            <div class="card-body py-3 flex-fill">
+                <div class="row align-items-center mb-2 text-center">
+                    <div class="col-12">
+                        <h3 id="gain-loss">{{dividend_investment}} %</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card flex-fill w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title text-center mb-0">Dividend (Market)</h5>
+            </div>
+            <div class="card-body py-3 flex-fill">
+                <div class="row align-items-center mb-2 text-center">
+                    <div class="col-12">
+                        <h3>{{div_market}} %</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row row-eq-height">
+    <div class="col-md-6">
+        <div class="card w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title mb-0">Dividend by Stock ({% autoescape off %}{{currency.symbol}}{% endautoescape %})</h5>
+            </div>
+            <div class="card-body py-3">
+                <canvas id="divBySymbol" max-width="400" max-height="400"></canvas>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="card w-100 rounded-lg shadow-sm mb-3">
+            <div class="card-header bg-transparent">
+                <h5 class="card-title mb-0">Acquired Dividend by Year ({% autoescape off %}{{currency.symbol}}{% endautoescape %})</h5>
+            </div>
+            <div class="card-body py-3">
+                <canvas id="divByYear" max-width="400" max-height="400"></canvas>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="row px-3 mb-3">
+    <div class="card flex-fill rounded-lg shadow-sm">
+        <div class="card-header bg-transparent align-items-center">
+            <div class="d-flex flex-row">
+                <div class="p-0 align-self-center">
+                    <h5 class="card-title mb-0 h5">My Dividends</h5>
+                </div>
+                <div class="pl-3">
+                    <a href="{% url 'add_dividend' %}" class="btn btn-outline-primary rounded-sm">Add Dividend</a>
+                    <a href="{% url 'export_div_excel' %}" class="bi bi-filetype-xlsx btn btn-outline-primary rounded-sm">Export to Excel</a>
+                    <a href="{% url 'export_div_csv' %}" class="bi bi-filetype-csv btn btn-outline-primary rounded-sm">Export to CSV</a>
+                </div>
+            </div>
+        </div>
+        <div class="table-responsive bg-white my-0 rounded-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Amount</th>
+                        <th>Date</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for dividend in dividends %}
+                    <tr>
+                        <td class="symbol">{{dividend.symbol}}</td>
+                        <td class="symbol">{{dividend.amount}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</td>
+                        <td class="date">{{dividend.date}}</td>
+                        <td><a href="{% url 'detail_dividend' dividend.id %}" class="bi bi-info-circle"></a></td>
+                        <td><a href="{% url 'edit_dividend' dividend.id %}" class="bi bi-pencil"></a></td>
+                        <td class="delete"><a href="{% url 'delete_dividend' dividend.id %}" class="bi bi-trash"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/dividends.js' %}"></script>
+{% endblock content %}

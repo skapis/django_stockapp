@@ -1,0 +1,25 @@
+<nav class="navbar navbar-expand-sm navbar-light bg-light shadow-sm">
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dashboard' %}"><strong>Dashboard</strong></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'transactions' %}"><strong>Transactions</strong></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'dividend_dashboard' %}"><strong>Dividends</strong></a>
+            </li>
+        </ul>
+        <span class="nav-link pl-0 pb-0 position-relative">
+            <h5 class="bi bi-person-circle"><a class="stretched-link" id="user_profile_link" href="{% url 'account' %}"> {{request.user.username}}</a></h5>
+        </span>
+        <form  class="form-inline mt-2 mb-1" action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <input type="submit" class="btn btn-outline-primary rounded-sm" value="Sign out">
+        </form>
+    </div>
+</nav>

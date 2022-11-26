@@ -1,0 +1,72 @@
+.bd-placeholder-img {
+  font-size: 1.125rem;
+  text-anchor: middle;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@media (min-width: 768px) {
+  .bd-placeholder-img-lg {
+    font-size: 3.5rem;
+  }
+}
+
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+  #card-row{
+    display: block;
+  }
+  .btn{
+    margin-bottom: 4px;
+  }
+
+}
+
+.showPasswordToggle {
+  cursor: pointer;
+  transition: all;
+}
+
+.showPasswordToggle:hover {
+  transform: scale(1.2);
+}
+
+.card-title{
+  font-weight: 400;
+}
+
+.company_logo{
+  max-width: 50px;
+  max-height: 50px;
+}
+
+#user_profile_link{
+  color: black;
+  font-weight: 500;
+}
+
+#user_profile_link:hover{
+  text-decoration: none;
+}
+
+#portfolio_link{
+  color: inherit;
+}
+
+#portfolio_link{
+  text-decoration: none;
+}
+
+#todo_link{
+  color: inherit;
+}
+
+#todo_link{
+  text-decoration: none;
+}
+
+.bi-person-circle{
+  color: black;
+}
+

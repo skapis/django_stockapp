@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="border border-light p-3 mb-4 justify-content-center align-items-center" style="height: 100%">
+    {% include 'partials/messages.html' %}
+    <div class="row justify-content-center align-items-center">
+        <a href="{% url 'dashboard' %}" class="btn btn-outline-primary rounded-sm">Back to Home</a>
+    </div>
+</div>
+{% endblock %}

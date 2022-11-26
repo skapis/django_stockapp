@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load mathfilters %}
+{% block content %}
+{% include 'partials/messages.html' %}
+<h1 class="h3 mb-3"><strong>Transactions</strong></h1>
+<div class="col-md-12 py-3 px-0">
+    <a href="{% url 'add_transaction' %}" class="btn btn-outline-primary rounded-sm">Add Transaction</a>
+    <a href="{% url 'export_excel' %}" class="bi bi-filetype-xlsx btn btn-outline-primary rounded-sm">Export to Excel</a>
+    <a href="{% url 'export_csv' %}" class="bi bi-filetype-csv btn btn-outline-primary rounded-sm">Export to CSV</a>
+</div>
+<div class="row px-3">
+    <div class="card flex-fill rounded-lg shadow-sm">
+        <div class="table-responsive bg-white my-0 rounded-sm">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Symbol</th>
+                        <th>Share Price</th>
+                        <th>Amount</th>
+                        <th>Fee</th>
+                        <th>Broker</th>
+                        <th>Date</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for transaction in transactions %}
+                    <tr>
+                        <td class="symbol"><a href="{% url 'detail_stock' transaction.stock_id.id %}">{{transaction.symbol}}</a></td>
+                        <td class="price">{{transaction.cost_share}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</td>
+                        <td class="amount">{{transaction.shares}}</td>
+                        <td class="fee">{{transaction.fee_amount}} {% autoescape off %} {{currency.symbol}} {% endautoescape %}</td>
+                        <td class="broker">{{transaction.broker}}</td>
+                        <td class="date">{{transaction.date}}</td>
+                        <td><a href="{% url 'detail_transaction' transaction.id %}" class="bi bi-info-circle"></a></td>
+                        <td><a href="{% url 'edit_transaction' transaction.id %}" class="bi bi-pencil"></a></td>
+                        <td><a href="{% url 'delete_transaction' transaction.id %}" class="bi bi-trash"></a></td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+{% endblock content %}

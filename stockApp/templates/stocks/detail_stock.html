@@ -1,0 +1,177 @@
+{% extends 'base.html' %}
+{% load mathfilters %}
+{% block content %}
+<div class="row py-3">
+    <div class="col">
+        {% include 'partials/messages.html' %}
+        <div class="row ml-0">
+            <img src={{context.stock.logo}} alt="alternatetext" class="company_logo">
+            <h1 class="py-1 px-2 h3"><strong>{{context.stock.name}}</strong></h1>
+        </div>
+        <div class="col-md-12 py-3 px-0">
+            <a href="{% url 'add_transactions_with_id' context.stock.id %}" class="btn btn-outline-primary rounded-sm">Add transaction</a>
+            <a href="{% url 'add_dividend' %}" class="btn btn-outline-primary rounded-sm">Add dividend</a>
+            <a href="{% url 'delete_stock' context.stock.id %}" class="btn btn-outline-danger rounded-sm">Delete Stock</a>
+        </div>
+        <div>
+        <div class="card rounded-lg mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Symbol</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.stock.symbol}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Name</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.stock.name}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Sector</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.stock.sector}}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="card rounded-lg mb-3 shadow-sm">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Current price</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.stock.price|mul:context.rate|floatformat:2}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Current Value</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.cur_value}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Shares in portfolio</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.shares_count.shares_count}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Total Costs</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.costs}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <p class="mb-0">Average Price</p>
+                    </div>
+                    <div class="col-sm-9">
+                    <p class="text-muted mb-0">{{context.avg_price}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row px-3">
+            <div class="card flex-fill rounded-lg shadow-sm">
+                <div class="card-header bg-transparent align-items-center">
+                    <div class="d-flex flex-row">
+                        <div class="p-0 align-self-center">
+                            <h5 class="card-title mb-0 h5">Transactions</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive bg-white my-0 rounded-sm">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Share Price</th>
+                                <th>Amount</th>
+                                <th>Fee</th>
+                                <th>Broker</th>
+                                <th>Date</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for transaction in transactions %}
+                            <tr>
+                                <td class="symbol">{{transaction.symbol}}</td>
+                                <td class="price">{{transaction.cost_share}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</td>
+                                <td class="amount">{{transaction.shares}}</td>
+                                <td class="type">{{transaction.fee_amount}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</td>
+                                <td class="broker">{{transaction.broker}}</td>
+                                <td class="date">{{transaction.date}}</td>
+                                <td><a href="{% url 'detail_transaction' transaction.id %}" class="bi bi-info-circle"></a></td>
+                                <td><a href="{% url 'edit_transaction' transaction.id %}" class="bi bi-pencil"></a></td>
+                                <td><a href="{% url 'delete_transaction' transaction.id %}" class="bi bi-trash"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="row px-3 py-3">
+            <div class="card flex-fill rounded-lg shadow-sm">
+                <div class="card-header bg-transparent align-items-center">
+                    <div class="d-flex flex-row">
+                        <div class="p-0 align-self-center">
+                            <h5 class="card-title mb-0 h5">Dividends</h5>
+                        </div>
+                    </div>
+                </div>
+                <div class="table-responsive bg-white my-0 rounded-sm">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Symbol</th>
+                                <th>Amount</th>
+                                <th>Date</th>
+                                <th></th>
+                                <th></th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for dividend in dividends %}
+                            <tr>
+                                <td class="symbol">{{dividend.symbol}}</td>
+                                <td class="price">{{dividend.amount}} {% autoescape off %} {{context.currency.symbol}} {% endautoescape %}</td>
+                                <td class="date">{{dividend.date}}</td>
+                                <td><a href="{% url 'detail_dividend' dividend.id %}" class="bi bi-info-circle"></a></td>
+                                <td><a href="{% url 'edit_dividend' dividend.id %}" class="bi bi-pencil"></a></td>
+                                <td><a href="{% url 'delete_dividend' dividend.id %}" class="bi bi-trash"></a></td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,82 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1 class="h3 mb-3"><strong>API Documentation</strong></h1>
+{% include 'partials/messages.html' %}
+<div class="row">
+    <div class="col">
+        <div class="card flex-fill rounded-lg shadow-sm">
+            <div class="card-header bg-transparent align-items-center">
+                <div class="d-flex flex-row">
+                    <div class="p-0 align-self-center">
+                        <h5 class="card-title mb-0 h5">Transactions</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <a>Your API URL:</a>
+                <a href="{% url 'transactions_api' user_api.api_key %}">{{request.get_host}}{% url 'transactions_api' user_api.api_key %}</a>
+                <div class="row py-3 px-3">
+                    <table class="table">
+                        <thead>
+                            <th>Requests GET parameters</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>symbol</td>
+                                <td><small>[optional] Enter the stock symbol to get transactions for specific symbol<br><strong>Example: &symbol=AAPL</strong></small></td>
+                            </tr>
+                            <tr>
+                                <td>date_from</td>
+                                <td><small>[optional] Enter the date (format 'YYYY-MM-DD') of your preferred timeframe<br><strong>Example: &date_from=2008-01-18</strong></small></td>
+                            </tr>
+                            <tr>
+                                <td>date_to</td>
+                                <td><small>[optional] Enter the date (format 'YYYY-MM-DD') of your preferred timeframe<br><strong>Example: &date_to=2022-08-17</strong></small></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col">
+        <div class="card flex-fill rounded-lg shadow-sm">
+            <div class="card-header bg-transparent align-items-center">
+                <div class="d-flex flex-row">
+                    <div class="p-0 align-self-center">
+                        <h5 class="card-title mb-0 h5">Dividends</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <a>Your API URL:</a>
+                <a href="{% url 'dividends_api' user_api.api_key %}">{{request.get_host}}{% url 'dividends_api' user_api.api_key %}</a>
+                <div class="row py-3 px-3">
+                    <table class="table">
+                        <thead>
+                            <th>Requests GET parameters</th>
+                            <th></th>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>symbol</td>
+                                <td><small>[optional] Enter the stock symbol to get dividends for specific symbol<br><strong>Example: &symbol=AAPL</strong></small></td>
+                            </tr>
+                            <tr>
+                                <td>date_from</td>
+                                <td><small>[optional] Enter the date (format 'YYYY-MM-DD') of your preferred timeframe<br><strong>Example: &date_from=2008-01-18</strong></small></td>
+                            </tr>
+                            <tr>
+                                <td>date_to</td>
+                                <td><small>[optional] Enter the date (format 'YYYY-MM-DD') of your preferred timeframe<br><strong>Example: &date_to=2022-08-17</strong></small></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,59 @@
+{% extends 'base_auth.html' %}
+{% load static %}
+{% block content %}
+<div class="row">
+    <div class="col-md-4"></div>
+    <div class="col-md-4">
+        <div class="card rounded-lg shadow-sm mt-5">
+            <div class="card-body">
+                <div class="card-title py-3 text-center">
+                    <h4><strong>Register for a free account</strong></h4>
+                </div>
+                <form action="{% url 'register' %}", method="post">
+                    {% csrf_token %}
+                    {% include 'partials/messages.html' %}
+                    <div class="form-group">
+                        <input type="text"
+                               name="username"
+                               id="usernameField"
+                               placeholder="Username"
+                               value="{{fieldValues.username}}"
+                               class="form-control form-control-sm rounded-sm"/>
+                    </div>
+                    <div class="invalid_feedback invalid-feedback" style="display:none">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="email" name="email" id="emailField" value="{{fieldValues.email}}"
+                               placeholder="email@example.com"
+                               class="form-control form-control-sm rounded-sm"/>
+                    </div>
+                    <div class="emailFeedbackArea invalid-feedback" style="display:none">
+
+                    </div>
+                    <div class="form-group">
+                        <input type="password" name="password" id="passwordField" placeholder="Password" class="form-control form-control-sm rounded-sm"/>
+                        <i class="far fa-eye showPasswordToggle float-right py-3"></i>
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="plan">Portfolio Plan</label>
+                        <select name="plan" id="premium" class="form-control form-control-sm rounded-sm">
+                            <option name="plan" id="1">Free</option>
+                            <option name="plan" id="2">Investor</option>
+                            <option name="plan" id="3">Trader</option>
+                        </select>
+                    </div> -->
+                    <input type="submit" value="Register" class="btn btn-block btn-primary submit-btn rounded-sm"/>
+                </form>
+                <div class="container text-center">
+                    <span>Already a user? <span><a href="{% url 'login' %}">Login</a><br>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-4"></div>
+</div>
+
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock content %}

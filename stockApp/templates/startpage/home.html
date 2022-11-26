@@ -1,0 +1,31 @@
+{% extends 'base_home.html' %}
+{% load static %}
+{% block content %}
+<div class="container mt-4 ml-2">
+    <div class="row py-3">
+        <h1>My apps</h1>
+    </div>
+    <div class="row px-0 py-3">
+        <div class="col-xl-4 col-lg-6 pl-0">
+            <div class="card py-3 px-4 rounded-sm shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0"><a id="portfolio_link" class="stretched-link" href="{% url 'login' %}">Portfolio Tracker</a></h5>
+                    <div class="py-3">
+                        <h1 class="bi bi-graph-up-arrow"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xl-4 col-lg-6 pl-0">
+            <div class="card py-3 px-4 rounded-sm shadow-sm">
+                <div class="card-body text-center">
+                    <h5 class="card-title mb-0"><a id="todo_link" class="stretched-link" href="#">Other App</a></h5>
+                    <div class="py-3">
+                        <h1 class="bi bi-card-checklist"></h1>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
